@@ -3,7 +3,9 @@ import client from "@/utils/redisClient"
 export const GET = async (request) => {
     try {
 
-        rsp = await client.zRange("popular", 0, 19)
+        rsp = await client.zRange("popular", 0, 20, {
+            REV: true,
+        })
         console.log({ rsp })
         return new Response(rsp, { status: 200 })
     } catch (error) {
