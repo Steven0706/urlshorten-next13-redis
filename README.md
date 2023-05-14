@@ -2,7 +2,7 @@
 
 This is a URL shortener project, designed to efficiently and quickly shorten your URLs for easier sharing and better presentation. This project is written in Node.js and uses Redis as its database. 
 
-##Prerequisites
+## Prerequisites
 Docker (23.05)
 Node.js (20.1.0)
 npm
