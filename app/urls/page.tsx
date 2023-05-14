@@ -1,32 +1,57 @@
-// "use client"
+"use client"
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Form from "@/components/Form";
+
+export default function CreateSurl() {
+    const router = useRouter();
+
+    const [submitting, setIsSubmitting] = useState(false);
+    const [post, setPost] = useState({ title: "", longUrl: "", customUrl: "" });
+    const [error, setError] = useState("");
 
 
-import CreateSurl from './CreateSurl';
+    const createShortUrl = async (e: any) => {
+        e.preventDefault();
+        setIsSubmitting(true);
 
-
-
-export default async function UrlShorten() {
+        try {
+            const response = await fetch('/api/urls/new', {
+                method: 'POST',
+                body: JSON.stringify({
+                    title: post.title,
+                    longUrl: post.longUrl,
+                    customUrl: post.customUrl
+                })
+            });
+            if (response.ok) {
+                router.push("/");
+            }
+            else if (response.status == 500) {
+                console.log("Error: ", response.statusText);
+                setError("This ShortUrl already exists");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+        finally {
+            setIsSubmitting(false);
+        }
+    }
 
 
     return (
         <div>
-            <CreateSurl />
-            <h1>Top 10 URLs</h1>
-            <div>
-                <p> value pending...</p>
-
-            </div>
+            <Form
+                post={post}
+                setPost={setPost}
+                submitting={submitting}
+                handleSubmit={createShortUrl}
+                error={error}
+            />
         </div>
-    )
-}
 
-function urlItem({ url }: any) {
-    const { title, longUrl, shortUrl } = url || {};
-    return (
-        <div>
-            <h2>{title}</h2>
-            <h3>{longUrl}</h3>
-            <h3>{shortUrl}</h3>
-        </div>
     )
+
 }
