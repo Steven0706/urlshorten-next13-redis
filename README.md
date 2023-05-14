@@ -36,7 +36,7 @@ npm run start
 
 ## UI
 visit localhost:3000 for the UI
-![popular and search home page]([url](https://github.com/Steven0706/urlshorten-next13-redis/assets/15137242/17f4a319-7469-47e0-b322-225e0ea2e6ed))
+![popular and search home page]([url](https://github.com/Steven0706/urlshorten-next13-redis/assets/15137242/17f4a319-7469-47e0-b322-225e0ea2e6ed)
 ![create new shortUrl page](https://github.com/Steven0706/urlshorten-next13-redis/assets/15137242/bada59c0-1813-470b-8eb6-1697ef76d091)
 
 
