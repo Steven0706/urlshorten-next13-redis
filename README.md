@@ -19,6 +19,7 @@ This command will run Redis in detached mode, assign the name "redis-stack" to t
 
 ## (test)
 ```bash
+npm i
 npm run dev
 ````
 
