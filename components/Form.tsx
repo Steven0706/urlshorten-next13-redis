@@ -1,6 +1,25 @@
+import { ChangeEvent, FormEvent } from "react";
 import Link from "next/link";
 
-const Form = ({ post, setPost, submitting, handleSubmit, error }) => {
+interface Post {
+    longUrl: string;
+    title: string;
+    customUrl: string;
+}
+
+interface FormProps {
+    post: Post;
+    setPost: (post: Post) => void;
+    submitting: boolean;
+    handleSubmit: (e: FormEvent) => void;
+    error: string;
+}
+
+const Form = ({ post, setPost, submitting, handleSubmit, error }: FormProps) => {
+    const handleInputChange = (field: keyof Post) => (e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        setPost({ ...post, [field]: e.target.value });
+    };
+
     return (
         <section className='w-full max-w-full flex-start flex-col'>
             <h1 className='head_text text-left'>
@@ -21,7 +40,7 @@ const Form = ({ post, setPost, submitting, handleSubmit, error }) => {
 
                     <textarea
                         value={post.longUrl}
-                        onChange={(e) => setPost({ ...post, longUrl: e.target.value })}
+                        onChange={handleInputChange('longUrl')}
                         placeholder='copy and paste your long url here'
                         required
                         className='form_textarea '
@@ -37,7 +56,7 @@ const Form = ({ post, setPost, submitting, handleSubmit, error }) => {
                     </span>
                     <input
                         value={post.title}
-                        onChange={(e) => setPost({ ...post, title: e.target.value })}
+                        onChange={handleInputChange('title')}
                         type='text'
                         placeholder='title of my url'
                         className='form_input'
@@ -52,7 +71,7 @@ const Form = ({ post, setPost, submitting, handleSubmit, error }) => {
                     </span>
                     <input
                         value={post.customUrl}
-                        onChange={(e) => setPost({ ...post, customUrl: e.target.value })}
+                        onChange={handleInputChange('customUrl')}
                         type='text'
                         placeholder='customized shortUrl here'
                         className='form_input'

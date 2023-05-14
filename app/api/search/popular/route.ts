@@ -1,6 +1,6 @@
 import client from "@/utils/redisClient"
 
-async function getHashes(keys) {
+async function getHashes(keys: string[]) {
     let hashes = [];
     for (let i = 0; i < keys.length; i++) {
         hashes.push(client.hGetAll("shortUrl:" + keys[i]));
@@ -9,7 +9,7 @@ async function getHashes(keys) {
     return Promise.all(hashes);
 }
 
-export const GET = async (request) => {
+export const GET = async (request: Request) => {
     try {
         const rsp = await client.zRange("popular", 0, 20, {
             REV: true,

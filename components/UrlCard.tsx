@@ -3,15 +3,19 @@
 import { useState } from "react";
 import Image from "next/image";
 
+interface UrlCardProps {
+    title: string;
+    longUrl: string;
+    shortUrl: string;
+}
 
-
-const UrlCard = ({ title, longUrl, shortUrl }) => {
+const UrlCard = ({ title, longUrl, shortUrl }: UrlCardProps) => {
     const [copied, setCopied] = useState("");
 
     const handleCopy = () => {
-        setCopied(longUrl);
-        navigator.clipboard.writeText(longUrl);
-        setTimeout(() => setCopied(false), 3000);
+        setCopied(shortUrl);
+        navigator.clipboard.writeText(shortUrl);
+        setTimeout(() => setCopied(""), 3000);
     };
     return (
         <div className="url_card">
@@ -20,11 +24,11 @@ const UrlCard = ({ title, longUrl, shortUrl }) => {
                 <div className='copy_btn' onClick={handleCopy}>
                     <Image
                         src={
-                            copied === longUrl
+                            copied === shortUrl
                                 ? "/assets/icons/tick.svg"
                                 : "/assets/icons/copy.svg"
                         }
-                        alt={copied === longUrl ? "tick_icon" : "copy_icon"}
+                        alt={copied === shortUrl ? "tick_icon" : "copy_icon"}
                         width={12}
                         height={12}
                     />

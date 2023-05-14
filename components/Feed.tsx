@@ -1,13 +1,23 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 
 import UrlCard from "./UrlCard";
 
-const UrlCardList = ({ data }) => {
-    console.log("UrlCardList=>", data)
+
+interface UrlCardProps {
+    title: string;
+    longUrl: string;
+    shortUrl: string;
+}
+
+interface UrlCardListProps {
+    data: UrlCardProps[];
+}
+
+const UrlCardList = ({ data }: UrlCardListProps) => {
     return (
-        <div className='mt-16 prompt_layout'>
+        <div className='mt-16 url_layout'>
             {data.map((post) => (
                 <UrlCard
                     key={post.longUrl}
@@ -21,35 +31,31 @@ const UrlCardList = ({ data }) => {
 };
 
 const Feed = () => {
-    const [allPosts, setAllPosts] = useState([]);
+    const [allPosts, setAllPosts] = useState<UrlCardProps[]>([]);
 
     // Search states
-    const [searchText, setSearchText] = useState("");
-    const [searchTimeout, setSearchTimeout] = useState(null);
-    const [searchedResults, setSearchedResults] = useState([]);
+    const [searchText, setSearchText] = useState<string>("");
+    const [searchTimeout, setSearchTimeout] = useState<NodeJS.Timeout | null>(null);
+    const [searchedResults, setSearchedResults] = useState<UrlCardProps[]>([]);
 
-
-    const filterPosts = async (searchtext) => {
+    const filterPosts = async (searchtext: string): Promise<UrlCardProps[]> => {
         const response = await fetch("/api/search/", {
             method: "POST",
             body: JSON.stringify({ searchQuery: searchtext })
         })
         if (response.ok) {
-            const data = await response.json();
-            console.log("searchedPosts=>", data)
+            const data: UrlCardProps[] = await response.json();
+            console.log("searchedPosts=>", data);
             return data;
+        } else {
+            // return an empty array if the request is not successful
+            return [];
         }
-
     };
-
-
 
     const fetchPosts = async () => {
         const response = await fetch("/api/search/popular");
-        const data = await response.json();
-
-        console.log("data=>", data)
-
+        const data: UrlCardProps[] = await response.json();
         setAllPosts(data);
     };
 
@@ -57,10 +63,9 @@ const Feed = () => {
         fetchPosts();
     }, []);
 
-
-    const handleSearchChange = (e) => {
+    const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
         console.log(e.target.value)
-        clearTimeout(searchTimeout);
+        clearTimeout(searchTimeout || undefined);
         setSearchText(e.target.value);
 
         // debounce method
@@ -71,8 +76,6 @@ const Feed = () => {
             }, 500)
         );
     };
-
-
 
     return (
         <section className='feed'>

@@ -1,9 +1,12 @@
 import client from "@/utils/redisClient"
 
-export const GET = async (request, { params }) => {
+interface Params {
+    shortUrl: string;
+}
+
+export const GET = async (request: Request, { params }: { params: Params }) => {
     try {
         console.log("params:", params.shortUrl)
-        // rsp = await client.hGetAll("shortUrl:" + params.shortUrl)
         const rsp = await client.hGetAll("shortUrl:" + params.shortUrl)
         console.log(rsp)
         if (Object.keys(rsp).length > 0) {
