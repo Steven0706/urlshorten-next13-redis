@@ -18,12 +18,13 @@ export default function CreateSurl() {
 
         try {
             const response = await fetch('/api/urls/new', {
+                cache: 'no-store',
                 method: 'POST',
                 body: JSON.stringify({
                     title: post.title,
                     longUrl: post.longUrl,
-                    customUrl: post.customUrl
-                })
+                    customUrl: post.customUrl,
+                }),
             });
             if (response.ok) {
                 router.push("/");

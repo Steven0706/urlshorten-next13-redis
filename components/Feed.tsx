@@ -40,6 +40,7 @@ const Feed = () => {
 
     const filterPosts = async (searchtext: string): Promise<UrlCardProps[]> => {
         const response = await fetch("/api/search/", {
+            cache: 'no-store',
             method: "POST",
             body: JSON.stringify({ searchQuery: searchtext })
         })
@@ -54,7 +55,7 @@ const Feed = () => {
     };
 
     const fetchPosts = async () => {
-        const response = await fetch("/api/search/popular");
+        const response = await fetch("/api/search/popular", { cache: 'no-store' });
         const data: UrlCardProps[] = await response.json();
         setAllPosts(data);
     };

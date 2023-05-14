@@ -15,7 +15,6 @@ export const POST = async (request) => {
     try {
         // Check if longUrl already exists in Redis
         let shortUrl = await client.get("longUrl:" + longUrl);
-        console.log("getting shortUrl", shortUrl)
         if (shortUrl) {
             return new Response(JSON.stringify({ shortUrl }), { status: 200 });
         } else {
@@ -49,7 +48,7 @@ export const POST = async (request) => {
             if (title) {
                 await client.hSet("shortUrl:" + shortUrl, "title", title)
             }
-
+            console.log("generated shortUrl ", shortUrl, " for ", longUrl)
             return new Response(JSON.stringify({ shortUrl }), { status: 200 });
         }
     } catch (error) {
