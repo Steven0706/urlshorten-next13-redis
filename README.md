@@ -4,7 +4,9 @@ This is a URL shortener project, designed to efficiently and quickly shorten you
 
 ## Prerequisites
 Docker (23.05)
+
 Node.js (20.1.0)
+
 npm
 
 ## Getting Started
@@ -86,6 +88,13 @@ curl --location 'http://localhost:3000/api/search' \
 
 # Notes and References
 As a backend-dominant software developer with just a bit of Vue+Flask experience, it was quite an interesting challenge to learn React + TypeScript + Next.js 13 + TailwindCSS and build a simple URL shortening website in just a few days. I've learned a lot of new things. Besides ChatGPT, I've also referred to the following content:
-https://youtu.be/DOIWQddRD5M
-https://youtu.be/__mSgDEOyv8
-https://youtu.be/wm5gMKuwSYk
+* https://youtu.be/DOIWQddRD5M
+* https://youtu.be/__mSgDEOyv8
+* https://youtu.be/wm5gMKuwSYk
+* all official doc
+
+# Possible future work
+* use docker-compose to make the deployment easier
+* polish server side rendering behaviour
+* use NEXT auth login 
+* tons of features can be added
