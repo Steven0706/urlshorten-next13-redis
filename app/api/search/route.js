@@ -6,7 +6,12 @@ export const POST = async (request) => {
     try {
         const res = await client.ft.search('urlIdx', searchQuery)
         console.log(res)
-        return new Response(JSON.stringify(res), { status: 200 });
+        const output = res.documents.map(doc => ({
+            shortUrl: doc.id.split(':')[1],
+            longUrl: doc.value.longUrl,
+            title: doc.value.title
+        }));
+        return new Response(JSON.stringify(output), { status: 200 });
 
     } catch (error) {
         console.log(error)

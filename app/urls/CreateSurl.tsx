@@ -15,9 +15,6 @@ export default function CreateSurl() {
 
     const create = async () => {
 
-        // await client.set(longUrl, shortUrl);
-        // await client.hSet(shortUrl, "longUrl", longUrl);
-        // await client.hSet(shortUrl, "title", title);
 
         setLongUrl('');
         setShortUrl('');

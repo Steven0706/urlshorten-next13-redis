@@ -1,14 +1,18 @@
-import client from './redis';
+import Feed from "@/components/Feed";
 
-export default async function Home() {
+const Home = () => (
+  <section className='w-full flex-center flex-col'>
+    <h1 className='blue_gradient head_text text-center'>
+      Shorten it & Save it
+      <br className='max-md:hidden' />
+      <span className='red_gradient text-center text-3xl'> Redis+NEXT13 Powered</span>
+    </h1>
+    <p className='desc text-center'>
+      This is just a boring Url Shortening service. But it's a 🔥 cool project.
+    </p>
 
-  const value = await client.hGetAll('your_key')
-  const value2 = await client.hGetAll('your_key')
-  return (
-    <>
-      <p className="text-lg py-10">Home</p>
-      <h2>{value.gg}</h2>
-      <h2>{value.rr}</h2>
-    </>
-  )
-}
+    <Feed />
+  </section>
+);
+
+export default Home;

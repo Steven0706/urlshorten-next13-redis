@@ -24,7 +24,14 @@ export default function RootLayout({
               About
             </Link>
           </nav>
-          {children}
+          <div className='main'>
+            <div className='gradient' />
+          </div>
+          <main className='app'>
+
+            {children}
+          </main>
+
         </main>
       </body>
     </html>

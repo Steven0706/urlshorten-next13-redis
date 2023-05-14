@@ -1,18 +1,12 @@
 // "use client"
 
-import client from '../redis';
+
 import CreateSurl from './CreateSurl';
 
 
-async function getRedisData() {
-    const value = await client.hGetAll('your_key');
-
-    return value;
-}
-
 
 export default async function UrlShorten() {
-    const topUrls = await getRedisData();
+
 
     return (
         <div>
@@ -20,7 +14,7 @@ export default async function UrlShorten() {
             <h1>Top 10 URLs</h1>
             <div>
                 <p> value pending...</p>
-                <p>{topUrls.gg}</p>
+
             </div>
         </div>
     )
