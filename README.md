@@ -41,7 +41,7 @@ bash init.sh
 ````
 
 # API Features
-You can visit: http://localhost:3000/api/<shortUrl> to obtain your long URL.
+You can visit: http://localhost:3000/api/yourshortUrl to obtain your long URL.
 
 This service can be further integrated into your Chrome plugin.
 
@@ -63,11 +63,11 @@ curl --location 'http://localhost:3000/api/search/popular'
 ```
 ### Convert short to long with details (GET):
 ```bash
-curl --location 'http://localhost:3000/api/urls?shortUrl=<shortUrl>'
+curl --location 'http://localhost:3000/api/urls?shortUrl=yourshortUrl'
 ```
 ### Convert short to long without details (GET):
 ```bash
-curl --location 'http://localhost:3000/api/<shortUrl>'
+curl --location 'http://localhost:3000/api/yourshortUrl'
 ```
 ### Search (POST):
 ```bash
